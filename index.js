@@ -83,22 +83,38 @@ const fs = require("fs");
 
 // creFol();
 
-function folCre(){
-    const folder = fs.existsSync("app",err=>{
-        console.log(err);
-    })
+function folCre() {
+  const folder = fs.existsSync("app", (err) => {
+    console.log(err);
+  });
 
-    if(!folder){
-        fs.mkdir("app",err =>{
-            if(err){
-                console.log(err);
-            }
-        })
-    }
-    else{
-        console.log("Folder Exists");
-        
-    }
+  if (!folder) {
+    fs.mkdir("app", (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  } else {
+    console.log("Folder Exists");
+  }
 }
 
 folCre();
+
+function cf() {
+  const folder = fs.existsSync("src", (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+
+  if (!folder) {
+    fs.mkdir("src", (err) => {
+      console.log(err);
+    });
+  } else {
+    console.log("exists");
+  }
+}
+
+cf();
