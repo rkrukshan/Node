@@ -118,3 +118,23 @@ function cf() {
 }
 
 cf();
+
+function fcf() {
+  const folder = fs.existsSync("srcFolder", (err) => {
+    if (err) {
+      console.log(err);
+    }
+  });
+
+  if (!folder) {
+    fs.mkdir("srcFolder", (err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("already created");
+      }
+    });
+  }
+}
+
+fcf();
