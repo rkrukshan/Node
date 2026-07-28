@@ -41,8 +41,8 @@ greet3();
 const path = require("path");
 const os = require("os");
 
-const { currentDate, year, profilePath } = require("./Basic/logger");
-const { add, sub, multiple } = require("./Basic/mathOpertions");
+const { currentDate, year, profilePath } = require("./logger");
+const { add, sub, multiple } = require("./mathOpertions");
 
 
 // ======================================================
@@ -88,19 +88,12 @@ if (os.platform() === "win32") {
 // 6. FILE SYSTEM (FS)
 // ======================================================
 
+const fs = require("fs").promises;
 const fs = require("fs");
 
-// const data = fs.readdirSync("./");
+const data = fs.readdirSync("./");
 
-// console.log(data);
-
-fs.readdir("./a", (err, data) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(data);
-  }
-});
+console.log(data);
 
 fs.readdir("./a", (err, data) => {
   if (err) {
@@ -110,33 +103,41 @@ fs.readdir("./a", (err, data) => {
   }
 });
 
-fs.mkdir("basic/myFolder", (err) => {
+fs.readdir("./a", (err, data) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(data);
+  }
+});
+
+fs.mkdir("myFolder", (err) => {
   if (err) {
     console.log(err);
     return;
   }
 });
 
-fs.mkdir("basic/myFolder/folder", (err) => {
+fs.mkdir("myFolder/folder", (err) => {
   if(err){
     console.log(err);
     return;
   }
 })
 
-fs.mkdir("basic/myFolder/folder/folder1", (err) => {
+fs.mkdir("myFolder/folder/folder1", (err) => {
   if (err) {
     console.log(err);
     return;
   }
 });
 
-const data1 = fs.readdirSync("basic/myFolder");
+const data1 = fs.readdirSync("myFolder");
 console.log(data1);
 
 async function mkFol() {
   try {
-    await fs.mkdir("basic/NewFolder", (err) => {
+    await fs.mkdir("NewFolder", (err) => {
       if (err) {
         console.log(err);
       }
@@ -149,14 +150,14 @@ async function mkFol() {
 mkFol();
 
 function creFol() {
-  const folder = fs.existsSync("basic/NewFolder1", (err) => {
+  const folder = fs.existsSync("NewFolder1", (err) => {
     if (err) {
       console.log(err + "Folder Exists");
     }
   })
 
   if (!folder) {
-    fs.mkdir("basic/NewFolder1", (err) => {
+    fs.mkdir("NewFolder1", (err) => {
       if (err) {
         console.log(err);
       }
@@ -174,12 +175,12 @@ creFol();
 // ======================================================
 
 function folCre() {
-  const folder = fs.existsSync("basic/app", (err) => {
+  const folder = fs.existsSync("app", (err) => {
     console.log(err);
   });
 
   if (!folder) {
-    fs.mkdir("basic/app", (err) => {
+    fs.mkdir("app", (err) => {
       if (err) {
         console.log(err);
       }
@@ -197,14 +198,14 @@ folCre();
 // ======================================================
 
 function cf() {
-  const folder = fs.existsSync("basic/src", (err) => {
+  const folder = fs.existsSync("src", (err) => {
     if (err) {
       console.log(err);
     }
   });
 
   if (!folder) {
-    fs.mkdir("basic/src", (err) => {
+    fs.mkdir("src", (err) => {
       console.log(err);
     });
   } else {
@@ -221,6 +222,9 @@ cf();
 
 const http = require("http");
 
+const path = require("path");
+
+const fs = require("fs");
 
 const server = http.createServer((req, res) => {
   if (req.url === "/") {
@@ -246,14 +250,14 @@ server.listen(port, () => {
 // ======================================================
 
 function cfs() {
-  const folder = fs.existsSync("basic/cf/src", (err) => {
+  const folder = fs.existsSync("cf/src", (err) => {
     if (err) {
       console.log(err);
     }
   });
 
   if (!folder) {
-    fs.mkdir("basic/cf/src", (err) => {
+    fs.mkdir("cf/src", (err) => {
       if (err) {
         console.log(err);
       } else {
