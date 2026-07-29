@@ -113,17 +113,16 @@ app.get("/:id/:status/:task", (req, res) => {
 app.post("/", (req, res) => {
   const response = req.body;
 
-
   if (!response.task) {
-    return res.send("required");
+    return res.status(400).send({ msg: "required" });
   }
 
   if (!response.tags) {
-    return res.send("required");
+    return res.status(400).json({ msg: "required" });
   }
 
   if (!response.status) {
-    return res.send("required");
+    return res.status(400).json({ msg: "required" });
   }
 
   const data = {
@@ -134,7 +133,33 @@ app.post("/", (req, res) => {
   };
 
   todoArr.push(data);
-  res.send(data);
+  res.status(201).json(data);
+});
+
+app.put("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const todoIndex = todoArr.findIndex((t) => t.id === id);
+
+  const { task, tags, status } = req.body;
+
+  if (todoIndex === -1) {
+    return res.status(404).json({ message: "Not Found" });
+  }
+
+  if (task) {
+    todoArr[todoIndex].task = task;
+  }
+
+  if (tags) {
+    todoArr[todoIndex].tags = tags;
+  }
+
+  if (status) {
+    todoArr[todoIndex].status = status;
+  }
+
+  res.json("updated");
 });
 
 app.get("/about", (req, res) => {
