@@ -162,6 +162,20 @@ app.put("/:id", (req, res) => {
   res.json("updated");
 });
 
+app.delete("/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const todoIndex = todoArr.findIndex((t) => t.id === id);
+
+  if (todoIndex === -1) {
+    return res.json({ message: "Not Found" });
+  }
+
+  todoArr.splice(todoIndex, 1);
+
+  return res.json("deleted");
+});
+
 app.get("/about", (req, res) => {
   res.send("About Page");
 });
