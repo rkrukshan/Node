@@ -84,6 +84,9 @@ const todoArr = [
 ];
 
 const app = express();
+
+app.use(express.json());
+
 //get all
 app.get("/", (req, res) => {
   res.send(todoArr);
@@ -97,14 +100,41 @@ app.get("/", (req, res) => {
 app.get("/:id", (req, res) => {
   const todoId = parseInt(req.params.id);
 
-  const data = todoArr.find((t) => t.id === todoId);
+  const result = todoArr.find((t) => t.id === todoId);
 
-  res.send(data);
+  res.send(result);
 });
 
 // get multiple params
 app.get("/:id/:status/:task", (req, res) => {
   res.send(req.params.task);
+});
+
+app.post("/", (req, res) => {
+  const response = req.body;
+
+
+  if (!response.task) {
+    return res.send("required");
+  }
+
+  if (!response.tags) {
+    return res.send("required");
+  }
+
+  if (!response.status) {
+    return res.send("required");
+  }
+
+  const data = {
+    id: todoArr[todoArr.length - 1].id + 1,
+    task: response.task,
+    tags: response.tags,
+    status: response.status,
+  };
+
+  todoArr.push(data);
+  res.send(data);
 });
 
 app.get("/about", (req, res) => {
