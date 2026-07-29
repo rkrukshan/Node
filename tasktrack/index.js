@@ -173,7 +173,7 @@ app.delete("/:id", (req, res) => {
 
   todoArr.splice(todoIndex, 1);
 
-  return res.json("deleted");
+  return res.json({ message: "deleted" });
 });
 
 app.get("/about", (req, res) => {
